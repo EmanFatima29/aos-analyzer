@@ -6,6 +6,7 @@ int run_monitor(void);
 int safe_kill(int pid, int signal_num);
 int run_trace(const char *cmd);
 int run_bench(void);
+void run_scheduler_sim(void);
 int run_netdemo(void);
 
 static void print_help(void) {
@@ -26,7 +27,11 @@ int main(int argc, char **argv) {
         if (argc < 3) { fprintf(stderr, "trace needs a command\n"); return 1; }
         return run_trace(argv[2]);
     }
-    if (strcmp(argv[1], "bench") == 0)   return run_bench();
+         if (strcmp(argv[1], "bench") == 0) {
+        run_bench();
+        run_scheduler_sim();
+        return 0;
+    }
     if (strcmp(argv[1], "netdemo") == 0) return run_netdemo();
 
     /* ---- ADD THIS NEW BLOCK HERE ---- */
